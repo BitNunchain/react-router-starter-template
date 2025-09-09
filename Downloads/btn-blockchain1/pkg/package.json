@@ -1,0 +1,8 @@
+{
+  "name": "btn-blockchain-wasm",
+  "version": "0.1.0",
+  "files": ["btn_blockchain_bg.wasm", "btn_blockchain.js", "btn_blockchain.d.ts"],
+  "module": "btn_blockchain.js",
+  "types": "btn_blockchain.d.ts",
+  "sideEffects": ["./btn_blockchain.js"]
+}

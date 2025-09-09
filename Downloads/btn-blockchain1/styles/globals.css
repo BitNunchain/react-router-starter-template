@@ -1,0 +1,193 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+:root {
+  --background: #10151c;
+  --foreground: #eaf0fa;
+  --card: #181f2a;
+  --card-foreground: #eaf0fa;
+  --popover: #181f2a;
+  --popover-foreground: #eaf0fa;
+  --primary: #2d7cf7;
+  --primary-foreground: #ffffff;
+  --secondary: #232a3a;
+  --secondary-foreground: #eaf0fa;
+  --muted: #232a3a;
+  --muted-foreground: #7a8ca3;
+  --accent: #2d7cf7;
+  --accent-foreground: #ffffff;
+  --destructive: #e74c3c;
+  --destructive-foreground: #ffffff;
+  --border: #232a3a;
+  --input: #232a3a;
+  --ring: #2d7cf7;
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+
+  /* Moved from @theme inline */
+  --font-sans: 'Inter', 'Segoe UI', 'Arial', sans-serif;
+  --font-mono: 'Fira Mono', 'Menlo', 'Monaco', monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+    outline-color: transparent;
+    font-family: var(--font-sans);
+    box-sizing: border-box;
+  }
+  body {
+    background: linear-gradient(135deg, #10151c 0%, #232a3a 100%);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    letter-spacing: 0.01em;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    color: #2d7cf7;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.5em;
+  }
+  a {
+    color: #2d7cf7;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  a:hover {
+    color: #1a5bb8;
+  }
+  .card, .dashboard-card {
+    background: var(--card);
+    border-radius: 1rem;
+    box-shadow: 0 4px 24px rgba(45, 124, 247, 0.08);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border);
+  }
+  button, .btn {
+    background: linear-gradient(90deg, #2d7cf7 0%, #1a5bb8 100%);
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(45, 124, 247, 0.12);
+    transition: background 0.2s;
+  }
+  button:hover, .btn:hover {
+    background: linear-gradient(90deg, #1a5bb8 0%, #2d7cf7 100%);
+  }
+  input, textarea, select {
+    background: var(--input);
+    color: var(--foreground);
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  input:focus, textarea:focus, select:focus {
+    border-color: #2d7cf7;
+  }
+}
+
+/* Cross-browser compatibility fixes */
+:host,
+html {
+  -webkit-text-size-adjust: 100%; /* Safari, legacy WebKit */
+  -ms-text-size-adjust: 100%;     /* IE, Edge (legacy) */
+  -moz-text-size-adjust: 100%;    /* Firefox (legacy) */
+  text-size-adjust: 100%; /* Chrome, Edge (Chromium), Samsung Internet. Not supported by Safari, Firefox, or IE. */
+}

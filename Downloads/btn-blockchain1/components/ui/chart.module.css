@@ -1,0 +1,21 @@
+/* Chart component styles for best practices and accessibility */
+.chart-indicator {
+  display: inline-block;
+  border-radius: 2px;
+  background-color: var(--indicator-bg, #ccc);
+  border: 1px solid var(--indicator-border, #ccc);
+}
+.indicator-dot {
+  height: 10px;
+  width: 10px;
+}
+.indicator-line {
+  width: 4px;
+  height: 10px;
+}
+.indicator-dashed {
+  border: 1.5px dashed var(--indicator-border, #ccc);
+  background: transparent;
+  width: 0;
+  height: 10px;
+}

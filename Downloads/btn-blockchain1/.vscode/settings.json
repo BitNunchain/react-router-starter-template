@@ -1,0 +1,8 @@
+{
+    "git.ignoreLimitWarning": true,
+    "inlineChat.enableV2": true,
+    "inlineChat.finishOnType": true,
+    "inlineChat.hideOnRequest": true,
+    "inlineChat.lineEmptyHint": true,
+    "inlineChat.notebookAgent": true
+}

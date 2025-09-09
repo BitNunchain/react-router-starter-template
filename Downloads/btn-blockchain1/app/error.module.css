@@ -1,0 +1,35 @@
+.errorPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #f8fafc;
+  color: #1e293b;
+  font-family: sans-serif;
+}
+
+.errorTitle {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.errorDescription {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.returnHomeLink {
+  color: #6366f1;
+  text-decoration: underline;
+  font-weight: bold;
+  font-size: 1rem;
+}

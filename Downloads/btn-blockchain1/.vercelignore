@@ -1,0 +1,13 @@
+server/
+pkg/
+src/
+Cargo.toml
+scripts/build-wasm.sh
+Dockerfile
+.env.example
+
+*.log
+node_modules/
+.next/
+dist/
+target/
