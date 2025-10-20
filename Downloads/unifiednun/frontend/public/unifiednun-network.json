@@ -1,0 +1,19 @@
+{
+  "chainId": "0x20d5e4",
+  "chainName": "UnifiedNun",
+  "rpcUrls": ["http://localhost:63886"],
+  "nativeCurrency": {
+    "name": "NUN",
+    "symbol": "NUN",
+    "decimals": 18
+  },
+  "blockExplorerUrls": [],
+  "iconUrls": ["🚀"],
+  "description": "UnifiedNun - Your Own Blockchain with NUN Cryptocurrency",
+  "features": {
+    "fees": "Ultra-low ($0.0001)",
+    "speed": "Lightning fast (<1s)",
+    "consensus": "Polygon CDK + AggLayer",
+    "status": "LIVE"
+  }
+}

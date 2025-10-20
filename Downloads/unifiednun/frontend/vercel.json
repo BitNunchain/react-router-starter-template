@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "env": {
+    "UNIFIEDNUN_RPC_URL": "https://rpc.unifiednun.com",
+    "UNIFIEDNUN_CHAIN_ID": "2151908",
+    "UNIFIEDNUN_CHAIN_NAME": "UnifiedNun",
+    "UNIFIEDNUN_TOKEN_SYMBOL": "NUN"
+  }
+}
