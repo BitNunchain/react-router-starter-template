@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { useSession } from 'next-auth/react'
 import { Shield } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -23,7 +22,6 @@ const showToast = (message: string, type: 'success' | 'error' = 'success') => {
 }
 
 export default function SubmitAuditPage() {
-  const { data: session } = useSession()
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
@@ -37,10 +35,7 @@ export default function SubmitAuditPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
-    if (!session) {
-      showToast('Please sign in to submit an audit', 'error')
-      return
-    }
+    // No authentication required - proceed with submission
 
     if (!formData.projectName || !formData.auditType) {
       showToast('Please fill in all required fields', 'error')
@@ -57,27 +52,6 @@ export default function SubmitAuditPage() {
     } finally {
       setLoading(false)
     }
-  }
-
-  if (!session) {
-    return (
-      <div className="min-h-screen bg-gray-50 py-12">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-lg shadow-lg">
-            <div className="p-6 text-center">
-              <Shield className="h-12 w-12 text-blue-500 mx-auto mb-4" />
-              <h2 className="text-xl font-semibold mb-2">Sign In Required</h2>
-              <p className="text-gray-500 mb-4">
-                Please sign in to submit an audit request
-              </p>
-              <Link href="/auth/signin" className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 inline-block">
-                Sign In
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
   }
 
   return (

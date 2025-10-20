@@ -14,8 +14,8 @@ interface Command {
 export default function LiveTerminal() {
   const [commands, setCommands] = useState<Command[]>([
     {
-      command: 'bitnun --version',
-      output: '1.0.0',
+      command: 'unifiednun --version',
+      output: '1.0.0 - UnifiedNun Launchpad',
       isRunning: false,
       timestamp: new Date().toLocaleTimeString()
     }
@@ -26,11 +26,11 @@ export default function LiveTerminal() {
   const terminalRef = useRef<HTMLDivElement>(null)
 
   const predefinedCommands = [
-    'bitnun --help',
-    'bitnun init my-dapp --template typescript',
-    'bitnun dev --help',
-    'bitnun deploy --help',
-    'bitnun list scaffold-templates'
+    'unifiednun --help',
+    'unifiednun init my-dapp --template typescript',
+    'unifiednun dev --fork-network-name unifiednun',
+    'unifiednun deploy --network-name unifiednun',
+    'unifiednun list scaffold-templates'
   ]
 
   const executeCommand = async (cmd: string) => {
@@ -151,7 +151,7 @@ export default function LiveTerminal() {
           <div key={index} className="mb-4">
             {/* Command Input */}
             <div className="flex items-center space-x-2 mb-2 group">
-              <span className="text-green-400">bitnun@terminal:~$</span>
+              <span className="text-green-400">unifiednun@launchpad:~$</span>
               <span className="text-white flex-1">{cmd.command}</span>
               <span className="text-gray-500 text-xs">{cmd.timestamp}</span>
               <button
@@ -182,13 +182,13 @@ export default function LiveTerminal() {
         
         {/* Current Input */}
         <form onSubmit={handleSubmit} className="flex items-center space-x-2">
-          <span className="text-green-400">bitnun@terminal:~$</span>
+          <span className="text-green-400">unifiednun@launchpad:~$</span>
           <input
             type="text"
             value={currentCommand}
             onChange={(e) => setCurrentCommand(e.target.value)}
             disabled={isRunning}
-            placeholder="Type a BITNUN command..."
+            placeholder="Type a UnifiedNun command..."
             className="flex-1 bg-transparent text-white outline-none placeholder-gray-500 disabled:opacity-50"
           />
           {isRunning && (

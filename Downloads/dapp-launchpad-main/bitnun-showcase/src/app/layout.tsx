@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { AuthProvider } from "@/components/AuthProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "BITNUN - Professional Blockchain Platform",
-  description: "Complete Web3 infrastructure platform with premium services including smart contract audits, academy courses, enterprise solutions, and more.",
+  title: "UnifiedNun - Revolutionary Blockchain Platform",
+  description: "Complete blockchain ecosystem with native NUN cryptocurrency and UnifiedNun Launchpad for seamless DApp development and deployment.",
 };
 
 export default function RootLayout({
@@ -28,9 +27,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <AuthProvider>
-          {children}
-        </AuthProvider>
+        {children}
       </body>
     </html>
   );

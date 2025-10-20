@@ -34,7 +34,7 @@ export default function Home() {
       description: 'Create full-stack dApps in seconds',
       icon: Rocket,
       color: 'from-blue-500 to-purple-600',
-      command: 'bitnun init my-dapp --template typescript',
+      command: 'unifiednun init my-dapp --template typescript',
       demo: 'Creates complete project structure with frontend & smart contracts'
     },
     {
@@ -43,26 +43,26 @@ export default function Home() {
       description: 'Live blockchain environment with hot reload',
       icon: Code,
       color: 'from-green-500 to-blue-500',
-      command: 'bitnun dev',
+      command: 'unifiednun dev',
       demo: 'Starts local blockchain + Next.js server with auto-reload'
     },
     {
       id: 'deploy',
       title: 'Production Deployment',
-      description: 'Deploy to mainnet/testnets with one command',
+      description: 'Deploy to UnifiedNun blockchain instantly',
       icon: Globe,
       color: 'from-purple-500 to-pink-500',
-      command: 'bitnun deploy -n ethereum',
-      demo: 'Deploys contracts to blockchain & frontend to Vercel'
+      command: 'unifiednun deploy --network-name unifiednun',
+      demo: 'Deploys contracts to UnifiedNun Chain & frontend to Vercel'
     },
     {
       id: 'networks',
       title: 'Multi-Chain Support',
-      description: 'Ethereum, Polygon, zkEVM and more',
+      description: 'UnifiedNun, Ethereum, Polygon, zkEVM and more',
       icon: Layers,
       color: 'from-orange-500 to-red-500',
-      command: 'bitnun dev -n polygonZkevm',
-      demo: 'Fork any supported blockchain for development'
+      command: 'unifiednun dev --network-name unifiednun',
+      demo: 'Native UnifiedNun blockchain development environment'
     }
   ]
 
@@ -80,9 +80,9 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">B</span>
+              <span className="text-white font-bold text-sm">U</span>
             </div>
-            <h1 className="text-2xl font-bold text-white">BITNUN</h1>
+            <h1 className="text-2xl font-bold text-white">UnifiedNun</h1>
           </div>
           <div className="hidden md:flex items-center space-x-1">
             {navItems.map((item) => (
@@ -152,18 +152,22 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8 }}
                 >
+                  <div className="mb-4">
+                    <span className="text-2xl md:text-3xl font-light text-blue-400">UnifiedNun</span>
+                    <span className="text-lg md:text-xl text-gray-400 ml-2">Web3 Innovation Ecosystem</span>
+                  </div>
                   <h1 className="text-6xl md:text-8xl font-bold text-white mb-6">
                     Build <span className="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">Web3</span>
                     <br />Apps Instantly
                   </h1>
                   <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
-                    BITNUN is the next-generation CLI tool for creating full-stack decentralized applications. 
-                    From zero to deployed dApp in minutes.
+                    <strong className="text-purple-400">UnifiedNun Launchpad</strong>: The complete Web3 ecosystem for your NUN blockchain. 
+                    Create, deploy, and manage dApps on UnifiedNun with ultra-low fees and lightning speed.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Link href="/install" className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl text-lg font-semibold hover:opacity-90 transition-opacity flex items-center justify-center space-x-2">
                       <Download size={20} />
-                      <span>Install BITNUN</span>
+                      <span>Install UnifiedNun CLI</span>
                     </Link>
                     <button 
                       onClick={() => setActiveSection('terminal')}
@@ -172,6 +176,44 @@ export default function Home() {
                       <Play size={20} />
                       <span>Try Live Demo</span>
                     </button>
+                  </div>
+                </motion.div>
+              </div>
+            </section>
+
+            {/* Brand Ecosystem */}
+            <section className="py-16 px-6 bg-gradient-to-r from-blue-500/10 to-purple-600/10">
+              <div className="max-w-6xl mx-auto">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="text-center mb-12"
+                >
+                  <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                    🚀 UnifiedNun Blockchain Ecosystem
+                  </h2>
+                  <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <div className="bg-black/30 rounded-xl p-6 border border-blue-500/20">
+                      <div className="text-2xl mb-3">⛓️</div>
+                      <h3 className="text-xl font-bold text-blue-400 mb-2">UnifiedNun Chain</h3>
+                      <p className="text-gray-300 text-sm">
+                        Revolutionary L2 blockchain with native NUN cryptocurrency. Built on Polygon CDK + AggLayer for lightning-fast, ultra-low-cost transactions.
+                      </p>
+                    </div>
+                    <div className="bg-black/30 rounded-xl p-6 border border-purple-500/20">
+                      <div className="text-2xl mb-3">🚀</div>
+                      <h3 className="text-xl font-bold text-purple-400 mb-2">UnifiedNun Launchpad</h3>
+                      <p className="text-gray-300 text-sm">
+                        Complete DApp development platform for UnifiedNun blockchain. One-click initialization, deployment, and management of Web3 projects.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="mt-8 p-4 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-lg border border-white/10">
+                    <p className="text-gray-300 text-sm">
+                      <strong className="text-white">Live Ecosystem:</strong> UnifiedNun blockchain is operational on Chain ID 2151908 
+                      with NUN native currency. Launchpad CLI provides full development toolkit for real DApp deployment.
+                    </p>
                   </div>
                 </motion.div>
               </div>
@@ -197,23 +239,23 @@ export default function Home() {
                 <div className="bg-black/30 rounded-2xl p-8 backdrop-blur-lg border border-white/10">
                   <div className="flex items-center space-x-2 mb-4">
                     <Terminal className="text-green-400" size={20} />
-                    <span className="text-green-400 font-mono text-sm">bitnun@terminal:~$</span>
+                    <span className="text-green-400 font-mono text-sm">unifiednun@launchpad:~$</span>
                   </div>
                   <div className="space-y-4 font-mono">
                     <div className="text-gray-300">
-                      <span className="text-blue-400"># Install BITNUN globally</span>
+                      <span className="text-blue-400"># Install UnifiedNun Launchpad globally</span>
                       <br />
-                      <span className="text-white">npm install -g bitnun</span>
+                      <span className="text-white">npm install -g unifiednun-launchpad</span>
                     </div>
                     <div className="text-gray-300">
-                      <span className="text-blue-400"># Create your first dApp</span>
+                      <span className="text-blue-400"># Create your first DApp on UnifiedNun</span>
                       <br />
-                      <span className="text-white">bitnun init my-awesome-dapp --template typescript</span>
+                      <span className="text-white">unifiednun init my-awesome-dapp --template typescript</span>
                     </div>
                     <div className="text-gray-300">
-                      <span className="text-blue-400"># Start development</span>
+                      <span className="text-blue-400"># Deploy to UnifiedNun blockchain</span>
                       <br />
-                      <span className="text-white">cd my-awesome-dapp && bitnun dev</span>
+                      <span className="text-white">cd my-awesome-dapp && unifiednun deploy --network-name unifiednun</span>
                     </div>
                   </div>
                 </div>
@@ -327,7 +369,7 @@ export default function Home() {
                     <Link href="/academy" className="block bg-gradient-to-br from-blue-500/10 to-cyan-500/10 p-8 rounded-2xl border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 group">
                       <div className="text-4xl mb-4">🎓</div>
                       <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors">
-                        BITNUN Academy
+                        UnifiedNun Academy
                       </h3>
                       <p className="text-gray-300 mb-4">
                         Premium courses, mentorship, and certification programs
@@ -508,10 +550,10 @@ export default function Home() {
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-12">
                 <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                  Try BITNUN Live
+                  Try UnifiedNun Launchpad Live
                 </h2>
                 <p className="text-xl text-gray-300">
-                  Interactive terminal with real BITNUN commands. Click the quick commands or type your own!
+                  Interactive terminal with real UnifiedNun commands. Click the quick commands or type your own!
                 </p>
               </div>
               <LiveTerminal />
@@ -598,11 +640,11 @@ export default function Home() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between">
           <div className="flex items-center space-x-2 mb-4 md:mb-0">
             <div className="w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-600 rounded"></div>
-            <span className="text-white font-bold">BITNUN</span>
+            <span className="text-white font-bold">UnifiedNun Launchpad</span>
             <span className="text-gray-400">v1.0.0</span>
           </div>
           <div className="text-gray-400 text-sm">
-            Built with ❤️ for the Web3 community
+            Built with ❤️ for the UnifiedNun blockchain community
           </div>
         </div>
       </footer>

@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { useSession } from 'next-auth/react'
 import { loadStripe } from '@stripe/stripe-js'
 import { 
   Elements, 
@@ -23,7 +22,6 @@ interface PaymentFormProps {
 }
 
 function PaymentForm({ serviceKey, serviceName, amount, onSuccess, metadata }: PaymentFormProps) {
-  const { data: session } = useSession()
   const stripe = useStripe()
   const elements = useElements()
   const [processing, setProcessing] = useState(false)
@@ -33,7 +31,7 @@ function PaymentForm({ serviceKey, serviceName, amount, onSuccess, metadata }: P
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
     
-    if (!stripe || !elements || !session) return
+    if (!stripe || !elements) return
 
     setProcessing(true)
     setError(null)
@@ -63,8 +61,8 @@ function PaymentForm({ serviceKey, serviceName, amount, onSuccess, metadata }: P
         payment_method: {
           card: elements.getElement(CardElement)!,
           billing_details: {
-            name: session.user.name || session.user.email,
-            email: session.user.email,
+            name: 'UnifiedNun User',
+            email: 'user@unifiednun.com',
           },
         },
       })
@@ -174,36 +172,7 @@ export default function PaymentModal({
   onClose, 
   metadata 
 }: PaymentFormProps & { onClose: () => void }) {
-  const { data: session } = useSession()
-
-  if (!session) {
-    return (
-      <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="bg-gray-900 rounded-2xl p-8 max-w-md w-full border border-gray-700"
-        >
-          <h2 className="text-2xl font-bold text-white mb-4">Login Required</h2>
-          <p className="text-gray-300 mb-6">Please sign in to purchase this service.</p>
-          <div className="flex space-x-4">
-            <button
-              onClick={onClose}
-              className="flex-1 py-3 px-6 bg-gray-700 text-white rounded-xl hover:bg-gray-600 transition-colors"
-            >
-              Cancel
-            </button>
-            <button
-              onClick={() => window.location.href = '/dashboard'}
-              className="flex-1 py-3 px-6 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-colors"
-            >
-              Sign In
-            </button>
-          </div>
-        </motion.div>
-      </div>
-    )
-  }
+  // No authentication required - proceed directly to payment
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">

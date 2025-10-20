@@ -4,7 +4,8 @@ import { NextResponse } from 'next/server'
 const RPC_ENDPOINTS = {
   ethereum: 'https://ethereum-rpc.publicnode.com',
   polygon: 'https://polygon-rpc.com',
-  sepolia: 'https://sepolia.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161' // Public Infura
+  sepolia: 'https://sepolia.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161', // Public Infura
+  unifiednun: 'http://localhost:63886' // Your live UnifiedNun blockchain
 }
 
 async function fetchBlockchainData(rpcUrl: string, networkName: string) {
@@ -44,7 +45,8 @@ async function fetchBlockchainData(rpcUrl: string, networkName: string) {
     const tpsMap: Record<string, number> = {
       ethereum: 15,
       polygon: 65,
-      sepolia: 15
+      sepolia: 15,
+      unifiednun: 1000 // Ultra-fast UnifiedNun chain
     }
 
     return {
@@ -75,10 +77,11 @@ async function fetchBlockchainData(rpcUrl: string, networkName: string) {
 export async function GET() {
   try {
     // Fetch data from multiple networks in parallel
-    const [ethereumData, polygonData, sepoliaData] = await Promise.all([
+    const [ethereumData, polygonData, sepoliaData, unifiednunData] = await Promise.all([
       fetchBlockchainData(RPC_ENDPOINTS.ethereum, 'ethereum'),
       fetchBlockchainData(RPC_ENDPOINTS.polygon, 'polygon'),
-      fetchBlockchainData(RPC_ENDPOINTS.sepolia, 'sepolia')
+      fetchBlockchainData(RPC_ENDPOINTS.sepolia, 'sepolia'),
+      fetchBlockchainData(RPC_ENDPOINTS.unifiednun, 'unifiednun')
     ])
 
     // Simulated BITNUN usage stats (you can replace with real database queries)
@@ -86,7 +89,9 @@ export async function GET() {
       projectsCreated: Math.floor(1200 + Math.random() * 100),
       activeDevelopers: Math.floor(800 + Math.random() * 100),
       deploymentsToday: Math.floor(30 + Math.random() * 20),
-      networksSupported: 6,
+      networksSupported: 7, // Including UnifiedNun
+      unifiednunDeployments: Math.floor(50 + Math.random() * 30),
+      nunTransactions: Math.floor(5000 + Math.random() * 1000),
       lastUpdated: new Date().toISOString()
     }
 
@@ -94,7 +99,8 @@ export async function GET() {
       networks: {
         ethereum: ethereumData,
         polygon: polygonData,
-        sepolia: sepoliaData
+        sepolia: sepoliaData,
+        unifiednun: unifiednunData
       },
       stats: usageStats,
       timestamp: new Date().toISOString()

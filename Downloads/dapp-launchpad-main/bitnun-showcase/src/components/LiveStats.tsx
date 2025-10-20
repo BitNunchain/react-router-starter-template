@@ -37,7 +37,7 @@ export default function LiveStats() {
     },
     {
       name: 'Networks Supported',
-      value: '6',
+      value: '7',
       change: '+1',
       icon: Globe,
       color: 'text-orange-400'
@@ -47,7 +47,8 @@ export default function LiveStats() {
   const [blockchainData, setBlockchainData] = useState({
     ethereum: { blocks: 18547392, gasPrice: '23 gwei', tps: '15' },
     polygon: { blocks: 49582749, gasPrice: '30 gwei', tps: '65' },
-    zkEVM: { blocks: 8472638, gasPrice: '0.1 gwei', tps: '2000' }
+    zkEVM: { blocks: 8472638, gasPrice: '0.1 gwei', tps: '2000' },
+    unifiednun: { blocks: 6482, gasPrice: '0.0001 NUN', tps: '1000' }
   })
 
   // Fetch real blockchain data
@@ -56,44 +57,52 @@ export default function LiveStats() {
       const response = await fetch('/api/blockchain-stats')
       const data = await response.json()
       
-      if (data.success && data.networks) {
-        const ethNetwork = data.networks.find((n: any) => n.name === 'Ethereum')
-        const polygonNetwork = data.networks.find((n: any) => n.name === 'Polygon')
-        const sepoliaNetwork = data.networks.find((n: any) => n.name === 'Sepolia')
+      if (data.networks) {
+        const ethNetwork = data.networks.ethereum
+        const polygonNetwork = data.networks.polygon
+        const sepoliaNetwork = data.networks.sepolia
+        const unifiednunNetwork = data.networks.unifiednun
         
-        if (ethNetwork || polygonNetwork || sepoliaNetwork) {
-          setBlockchainData({
-            ethereum: {
-              blocks: ethNetwork?.blockNumber || blockchainData.ethereum.blocks,
-              gasPrice: ethNetwork?.gasPrice || blockchainData.ethereum.gasPrice,
-              tps: ethNetwork?.tps || blockchainData.ethereum.tps
-            },
-            polygon: {
-              blocks: polygonNetwork?.blockNumber || blockchainData.polygon.blocks,
-              gasPrice: polygonNetwork?.gasPrice || blockchainData.polygon.gasPrice,
-              tps: polygonNetwork?.tps || blockchainData.polygon.tps
-            },
-            zkEVM: {
-              blocks: sepoliaNetwork?.blockNumber || blockchainData.zkEVM.blocks,
-              gasPrice: sepoliaNetwork?.gasPrice || '0.1 gwei',
-              tps: sepoliaNetwork?.tps || '2000'
-            }
-          })
+        setBlockchainData({
+          ethereum: {
+            blocks: ethNetwork?.blockNumber || blockchainData.ethereum.blocks,
+            gasPrice: ethNetwork?.gasPrice || blockchainData.ethereum.gasPrice,
+            tps: ethNetwork?.tps?.toString() || blockchainData.ethereum.tps
+          },
+          polygon: {
+            blocks: polygonNetwork?.blockNumber || blockchainData.polygon.blocks,
+            gasPrice: polygonNetwork?.gasPrice || blockchainData.polygon.gasPrice,
+            tps: polygonNetwork?.tps?.toString() || blockchainData.polygon.tps
+          },
+          zkEVM: {
+            blocks: sepoliaNetwork?.blockNumber || blockchainData.zkEVM.blocks,
+            gasPrice: sepoliaNetwork?.gasPrice || '0.1 gwei',
+            tps: sepoliaNetwork?.tps?.toString() || '2000'
+          },
+          unifiednun: {
+            blocks: unifiednunNetwork?.blockNumber || blockchainData.unifiednun.blocks,
+            gasPrice: '0.0001 NUN', // Ultra-low fees
+            tps: unifiednunNetwork?.tps?.toString() || '1000'
+          }
+        })
+        
+        // Update project stats
+        if (data.stats) {
+          setStats(prevStats => 
+            prevStats.map(stat => ({
+              ...stat,
+              value: stat.name === 'Projects Created' 
+                ? data.stats.projectsCreated?.toString() || stat.value
+                : stat.name === 'Active Developers'
+                ? data.stats.activeDevelopers?.toString() || stat.value
+                : stat.name === 'Deployments Today'
+                ? data.stats.deploymentsToday?.toString() || stat.value
+                : stat.name === 'Networks Supported'
+                ? data.stats.networksSupported?.toString() || stat.value
+                : stat.value
+            }))
+          )
         }
-        
-        // Update project stats too
-        setStats(prevStats => 
-          prevStats.map(stat => ({
-            ...stat,
-            value: stat.name === 'Projects Created' 
-              ? data.totalProjects?.toString() || stat.value
-              : stat.name === 'Deployments Today'
-              ? data.activeDeployments?.toString() || stat.value
-              : stat.name === 'Networks Supported'
-              ? data.networks?.length?.toString() || stat.value
-              : stat.value
-          }))
-        )
       }
     } catch (error) {
       console.error('Failed to fetch blockchain data:', error)
@@ -127,6 +136,14 @@ export default function LiveStats() {
       status: 'online'
     },
     {
+      name: 'UnifiedNun',
+      symbol: 'NUN',
+      color: 'from-purple-400 to-purple-600',
+      data: blockchainData.unifiednun,
+      status: 'online',
+      special: true
+    },
+    {
       name: 'Polygon zkEVM',
       symbol: 'ETH',
       color: 'from-green-500 to-green-600',
@@ -141,7 +158,7 @@ export default function LiveStats() {
       <div>
         <div className="flex items-center space-x-2 mb-6">
           <TrendingUp className="text-green-400" size={24} />
-          <h3 className="text-2xl font-bold text-white">Live BITNUN Stats</h3>
+          <h3 className="text-2xl font-bold text-white">Live UnifiedNun Stats</h3>
           <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
         </div>
         
@@ -173,14 +190,16 @@ export default function LiveStats() {
           <div className="text-green-400 text-sm">All Systems Operational</div>
         </div>
         
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-4 gap-6">
           {networks.map((network, index) => (
             <motion.div
               key={network.name}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white/5 rounded-xl p-6 backdrop-blur-lg border border-white/10"
+              className={`bg-white/5 rounded-xl p-6 backdrop-blur-lg border ${
+                network.special ? 'border-purple-400/50 ring-1 ring-purple-400/20' : 'border-white/10'
+              }`}
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center space-x-3">
@@ -188,10 +207,13 @@ export default function LiveStats() {
                     <span className="text-white font-bold text-sm">{network.symbol}</span>
                   </div>
                   <div>
-                    <h4 className="text-white font-semibold">{network.name}</h4>
+                    <h4 className="text-white font-semibold flex items-center space-x-2">
+                      <span>{network.name}</span>
+                      {network.special && <span className="text-purple-400 text-xs">🚀 YOUR CHAIN</span>}
+                    </h4>
                     <div className="flex items-center space-x-1">
                       <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                      <span className="text-green-400 text-xs">Online</span>
+                      <span className="text-green-400 text-xs">Live</span>
                     </div>
                   </div>
                 </div>
@@ -219,20 +241,20 @@ export default function LiveStats() {
       </div>
 
       {/* Feature Highlights */}
-      <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl p-8 border border-blue-500/20">
-        <h3 className="text-2xl font-bold text-white mb-6">Why Developers Choose BITNUN</h3>
+      <div className="bg-gradient-to-r from-purple-500/10 to-purple-600/10 rounded-2xl p-8 border border-purple-500/20">
+        <h3 className="text-2xl font-bold text-white mb-6">Why Developers Choose UnifiedNun Ecosystem</h3>
         <div className="grid md:grid-cols-3 gap-6">
           <div className="text-center">
-            <div className="text-3xl font-bold text-blue-400 mb-2">90%</div>
-            <div className="text-gray-300 text-sm">Faster Development</div>
+            <div className="text-3xl font-bold text-purple-400 mb-2">NUN</div>
+            <div className="text-gray-300 text-sm">Native Cryptocurrency</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-green-400 mb-2">Zero</div>
-            <div className="text-gray-300 text-sm">Configuration Required</div>
+            <div className="text-3xl font-bold text-green-400 mb-2">$0.0001</div>
+            <div className="text-gray-300 text-sm">Ultra-Low Gas Fees</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-purple-400 mb-2">6+</div>
-            <div className="text-gray-300 text-sm">Blockchain Networks</div>
+            <div className="text-3xl font-bold text-blue-400 mb-2">&lt;1s</div>
+            <div className="text-gray-300 text-sm">Lightning Block Time</div>
           </div>
         </div>
       </div>

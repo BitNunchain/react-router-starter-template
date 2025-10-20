@@ -8,32 +8,32 @@ export async function POST(request: NextRequest) {
   try {
     const { command } = await request.json()
 
-    // Security: Only allow specific BITNUN commands
+    // Security: Only allow specific UnifiedNun Launchpad commands
     const allowedCommands = [
-      'bitnun --help',
-      'bitnun --version', 
-      'bitnun list scaffold-templates',
-      'bitnun init --help',
-      'bitnun dev --help',
-      'bitnun deploy --help',
-      'bitnun generate --help'
+      'unifiednun --help',
+      'unifiednun --version', 
+      'unifiednun list scaffold-templates',
+      'unifiednun init --help',
+      'unifiednun dev --help',
+      'unifiednun deploy --help',
+      'unifiednun generate --help'
     ]
 
     // Check if command starts with allowed patterns
     const isAllowed = allowedCommands.some(allowed => 
       command === allowed || 
-      (command.startsWith('bitnun init ') && command.includes('--help')) ||
-      (command.startsWith('bitnun ') && command.endsWith(' --help'))
+      (command.startsWith('unifiednun init ') && command.includes('--help')) ||
+      (command.startsWith('unifiednun ') && command.endsWith(' --help'))
     )
 
     if (!isAllowed) {
       return NextResponse.json({
         error: 'Command not allowed for security reasons',
-        output: `Security: Command '${command}' is not in the allowed list.\nAllowed commands: ${allowedCommands.join(', ')}`
+        output: `Security: Command '${command}' is not in the allowed list.\nAllowed UnifiedNun Launchpad commands: ${allowedCommands.join(', ')}`
       }, { status: 400 })
     }
 
-    // Execute the real BITNUN command
+    // Execute the real UnifiedNun Launchpad command
     const startTime = Date.now()
     
     try {

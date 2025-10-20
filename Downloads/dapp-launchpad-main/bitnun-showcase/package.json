@@ -1,6 +1,7 @@
 {
-  "name": "bitnun-showcase",
-  "version": "0.1.0",
+  "name": "unifiednun-ecosystem",
+  "version": "1.0.0",
+  "description": "UnifiedNun Web3 Innovation Ecosystem - Complete Blockchain Platform with Launchpad",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",

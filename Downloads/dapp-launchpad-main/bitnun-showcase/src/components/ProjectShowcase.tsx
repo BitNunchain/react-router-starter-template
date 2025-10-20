@@ -174,7 +174,7 @@ export default function ProjectShowcase() {
       {/* Real Projects Section */}
       {realProjects.length > 0 && (
         <div className="space-y-6">
-          <h3 className="text-2xl font-bold text-white text-center">Your BITNUN Projects</h3>
+          <h3 className="text-2xl font-bold text-white text-center">Your UnifiedNun Projects</h3>
           <div className="grid md:grid-cols-3 gap-6">
             {realProjects.map((project: any, index) => (
               <motion.div
@@ -208,7 +208,7 @@ export default function ProjectShowcase() {
 
       {/* Demo Projects Grid */}
       <div className="space-y-6">
-        <h3 className="text-2xl font-bold text-white text-center">Demo Projects Built with BITNUN</h3>
+        <h3 className="text-2xl font-bold text-white text-center">Demo Projects Built with UnifiedNun Launchpad</h3>
         <motion.div 
           layout
           className="grid md:grid-cols-2 gap-8"

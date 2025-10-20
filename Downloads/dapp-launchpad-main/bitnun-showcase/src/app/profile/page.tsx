@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useSession } from 'next-auth/react'
 import { User, Mail, CreditCard, Wallet, Shield, Bell } from 'lucide-react'
 import Link from 'next/link'
 
@@ -29,39 +28,16 @@ const showToast = (message: string, type: 'success' | 'error' = 'success') => {
 }
 
 export default function ProfilePage() {
-  const { data: session, update } = useSession()
   const [loading, setLoading] = useState(false)
   const [profile, setProfile] = useState({
-    fullName: '',
-    email: '',
-    walletAddress: '',
-    subscriptionStatus: 'none',
-    totalSpent: 0
+    fullName: 'UnifiedNun User',
+    email: 'user@unifiednun.com',
+    walletAddress: '0x742d35Cc6634C0532925a3b8D100d0fEbD95d876',
+    subscriptionStatus: 'active',
+    totalSpent: 150
   })
 
-  useEffect(() => {
-    if (session?.user) {
-      fetchProfile()
-    }
-  }, [session])
-
-  const fetchProfile = async () => {
-    try {
-      const response = await fetch('/api/profile')
-      if (response.ok) {
-        const data = await response.json()
-        setProfile(data.profile || {
-          fullName: session?.user?.name || '',
-          email: session?.user?.email || '',
-          walletAddress: '',
-          subscriptionStatus: 'none',
-          totalSpent: 0
-        })
-      }
-    } catch (error) {
-      console.error('Failed to fetch profile:', error)
-    }
-  }
+  // No authentication required - show demo profile
 
   const updateProfile = async (updates: Partial<typeof profile>) => {
     setLoading(true)
@@ -92,23 +68,6 @@ export default function ProfilePage() {
       fullName: profile.fullName,
       walletAddress: profile.walletAddress
     })
-  }
-
-  if (!session) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="w-full max-w-md bg-white rounded-lg shadow-lg">
-          <div className="p-6">
-            <p className="text-center text-gray-500">Please sign in to view your profile</p>
-            <div className="mt-4 text-center">
-              <Link href="/auth/signin" className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 inline-block">
-                Sign In
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
   }
 
   return (
