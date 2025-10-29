@@ -1,0 +1,35 @@
+{
+  "name": "universal-web3-platform",
+  "version": "1.0.0",
+  "description": "A comprehensive Web3 platform with all market features in one smart contract ecosystem",
+  "main": "index.js",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy": "hardhat run scripts/deploy.js",
+    "deploy:testnet": "hardhat run scripts/deploy.js --network sepolia",
+    "deploy:polygon": "hardhat run scripts/deploy-simple.js --network polygon",
+    "deploy:simple": "hardhat run scripts/deploy-simple.js --network polygon",
+    "verify": "hardhat verify"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+    "hardhat": "^2.19.0",
+    "dotenv": "^16.3.1",
+    "@nomicfoundation/hardhat-ethers": "^3.0.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.9.0"
+  },
+  "keywords": [
+    "web3",
+    "defi",
+    "nft",
+    "marketplace",
+    "staking",
+    "governance",
+    "solidity"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
